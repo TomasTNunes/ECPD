@@ -1,4 +1,4 @@
-% tic
+tic
 
 clear all
 close all
@@ -34,7 +34,7 @@ figure(1), contourf(xv1,xv2,ff,Nlevel,LW,1.2), colorbar, colormap default
 axis([x1min x1max x2min x2max]), axis square
 hold on
 
-%% Compute and Plots important points
+%% Computes and Plots important points
 % Various initial guesses that result in different unconstrained minima
 x0_matrix = [1 -1; -1 1; 1.5 1.5; -0.3 -0.2; 0 -2; -2 0; 2 0; 0 0.5; 0 0]';
 
@@ -86,6 +86,7 @@ for i=1:length(x0_matrix)
 
 end
 
+title('Level curves of the function');
 hold off
 
 %% Plots the 3d view of the function
@@ -103,11 +104,14 @@ set(gg,'FontSize',14);
 gg=zlabel('f(x)');
 set(gg,'FontSize',14);
 
-%% Definines Boundary
+title('3D view of the function');
+
+%% Defines Boundary
 % initial estimate of the desired minimum
 x0 = [2;2];
 % reference minimum
 options = optimoptions('fminunc','Algorithm','quasi-newton','Display','off');  % without gradient
+% options = optimoptions('fminunc','Algorithm','trust-region','SpecifyObjectiveGradient',true,'Display','off');   % slow?
 xref = fminunc(@Prob2Function,x0,options)
 
 % Auxiliar variables
@@ -118,7 +122,7 @@ alpha(alpha==90) = 89.9;
 % vector with steps for each iteration
 step = [20 6 1.5 0.2];
 length_step = length(step);
-% vector that records all the ponits that converge to minimum
+% vector that records all the points that converge to minimum
 vec = xref';
 % vector with boundary points of lines with angle from 0º to 180º
 vecext1 = [zeros(length(alpha),1),zeros(length(alpha),1)];
@@ -134,9 +138,10 @@ for j=1:length(alpha)
     m = tan(alpha(j)*pi/180);    % slope of line
     b = xref(2) - m*xref(1);     % y(x=0)
     y = @(x) m*x + b;            % line function
-    run = true;                  % run/stop condition dor while loops
+    run = true;                  % run/stop condition for while loops
     xaux = xref;
     jj = 1;
+
     % Computes for angles from 0º to 180º
     while(run)
         xaux(1) = xaux(1) + step(jj)*cos(alpha(j)*pi/180);
@@ -161,7 +166,7 @@ for j=1:length(alpha)
     run = true;
     xaux = xref;
     jj = 1;
-     % Computes for angles from 180º to 360º
+    % Computes for angles from 180º to 360º
     while(run)
         xaux(1) = xaux(1) - step(jj)*cos(alpha(j)*pi/180);
         xaux(2) = y(xaux(1));
@@ -202,4 +207,4 @@ ylabel('x_2','FontSize',14);
 legend('converged points','boundary','Location','Northwest');
 title(sprintf('Boundary of the minimum (%.3f,%.3f) atraction basin',xref));
 
-% toc
+toc
