@@ -205,6 +205,6 @@ ylabel('x_2','FontSize',14);
 
 % Legend and Title
 legend('converged points','boundary','Location','Northwest');
-title(sprintf('Boundary of the minimum (%.3f,%.3f) atraction basin',xref));
+title(sprintf('Boundary of the minimum (%.3f,%.3f) attraction basin',xref));
 
 toc
