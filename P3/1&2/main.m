@@ -79,7 +79,7 @@ for i=1:length(u_min_vector)
     u_min = u_min_vector(i);
     u_max = u_max_vector(i);
     
-    % MPC inicialization
+    % MPC initialization
     md = MPCInit(Ad,Bd,Cyd,Czd,Dzd,Ccd,Dcd,Hp,Hw,zblk,Hu,ublk, ...
             du_max,du_min,u_max,u_min,z_max, ...
             z_min,Q,R,W,V,h,cmode,solver);
@@ -104,7 +104,7 @@ for i=1:length(u_min_vector)
     xlabel('time (s)');
     ylabel('u');
 end
-% instavel apartir umax umin +/-0.22
+% instavel a partir umax umin +/-0.22
 
 u_min=-100;
 u_max=100;
@@ -114,7 +114,7 @@ for i=1:length(du_min_vector)
     du_min = du_min_vector(i);
     du_max = du_max_vector(i);
     
-    % MPC inicialization
+    % MPC initialization
     md = MPCInit(Ad,Bd,Cyd,Czd,Dzd,Ccd,Dcd,Hp,Hw,zblk,Hu,ublk, ...
             du_max,du_min,u_max,u_min,z_max, ...
             z_min,Q,R,W,V,h,cmode,solver);
@@ -139,7 +139,7 @@ for i=1:length(du_min_vector)
     xlabel('time (s)');
     ylabel('u');
 end
-% instavel apartir dumax dumin +/-0.1
+% instável a partir dumax dumin +/-0.1
 
 du_min=-100;
 du_max=100;
@@ -149,7 +149,7 @@ for i=1:length(z_min_vector)
     z_min = z_min_vector(i);
     z_max = z_max_vector(i);
     
-    % MPC inicialization
+    % MPC initialization
     md = MPCInit(Ad,Bd,Cyd,Czd,Dzd,Ccd,Dcd,Hp,Hw,zblk,Hu,ublk, ...
             du_max,du_min,u_max,u_min,z_max, ...
             z_min,Q,R,W,V,h,cmode,solver);
@@ -183,7 +183,7 @@ for i=1:length(Q_vector)
     Q = Q_vector(i);
     R = R_vector(i);
     
-    % MPC inicialization
+    % MPC initialization
     md = MPCInit(Ad,Bd,Cyd,Czd,Dzd,Ccd,Dcd,Hp,Hw,zblk,Hu,ublk, ...
             du_max,du_min,u_max,u_min,z_max, ...
             z_min,Q,R,W,V,h,cmode,solver);
@@ -208,7 +208,7 @@ for i=1:length(Q_vector)
     xlabel('time (s)');
     ylabel('u');
 end
-% instavel apartir Q=1 R=150 => R/Q > 150 instavel
+% instavel a partir Q=1 R=150 => R/Q > 150 instavel
 
 Q=1000;
 R=10000;
@@ -217,7 +217,7 @@ for i=1:length(Hp_vector)
     clear md Hp kt yout uout
     Hp = Hp_vector(i);
     
-    % MPC inicialization
+    % MPC initialization
     md = MPCInit(Ad,Bd,Cyd,Czd,Dzd,Ccd,Dcd,Hp,Hw,zblk,Hu,ublk, ...
             du_max,du_min,u_max,u_min,z_max, ...
             z_min,Q,R,W,V,h,cmode,solver);
@@ -262,7 +262,7 @@ for i=1:length(Hp_vector)
     clear md Hp kt yout uout
     Hp = Hp_vector(i);
     
-    % MPC inicialization
+    % MPC initialization
     md = MPCInit(Ad,Bd,Cyd,Czd,Dzd,Ccd,Dcd,Hp,Hw,zblk,Hu,ublk, ...
             du_max,du_min,u_max,u_min,z_max, ...
             z_min,Q,R,W,V,h,cmode,solver);
@@ -287,7 +287,7 @@ for i=1:length(Hp_vector)
     xlabel('time (s)');
     ylabel('u');
 end
-% aparitr de H=100 existe problemas nas funçoes do MPC para esta
+% a partir de H=100 existe problemas nas funçoes do MPC para esta
 % configuração
 
     
