@@ -1,12 +1,12 @@
 Model {
-  Name			  "P4"
+  Name			  "P4_simulink"
   Version		  9.3
   SavedCharacterEncoding  "windows-1252"
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.69"
+    ComputedModelVersion    "1.78"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -46,7 +46,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [745.0, 0.0, 761.0, 958.0]
+      Location		      [456.0, 38.0, 761.0, 693.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -69,11 +69,11 @@ Model {
 	$ObjectID		5
 	$ClassName		"Simulink.EditorInfo"
 	IsActive		[1]
-	ViewObjType		"SimulinkSubsys"
-	LoadSaveID		"12"
-	Extents			[1426.0, 1658.0]
-	ZoomFactor		[1.0]
-	Offset			[-110.87500000000239, -86.625000000000341]
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
+	Extents			[1426.0, 1129.0]
+	ZoomFactor		[0.8]
+	Offset			[-30.0, -382.5]
       }
       Object {
 	$PropName		"DockComponentsInfo"
@@ -94,7 +94,7 @@ Model {
       "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
       "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAAD0AP///wAAAAEAAAAAAAAAAPwCA"
       "AAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
-      "QBjAHQAbwByAAAAAAD/////AAADVAD///8AAAXYAAAGoAAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
+      "QBjAHQAbwByAAAAAAD/////AAADVAD///8AAAXYAAAEjwAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
       "////wEAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/"
       "////wEAAADb/////wAAAAAAAAAA/////wEAAAGG/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAJh/////wAAAAAAAAAA/"
       "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAUu/////wAAAAAAAAAA/"
@@ -108,9 +108,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "tomas"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Jun 06 17:14:59 2022"
-  RTWModifiedTimeStamp	  576436032
-  ModelVersionFormat	  "1.%<AutoIncrement:69>"
+  LastModifiedDate	  "Mon Jun 06 18:39:53 2022"
+  RTWModifiedTimeStamp	  576441591
+  ModelVersionFormat	  "1.%<AutoIncrement:78>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "none"
@@ -166,11 +166,11 @@ Model {
     $PropName		    "DataLoggingOverride"
     $ObjectID		    7
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
-    model_		    "P4"
+    model_		    "P4_simulink"
     Array {
       Type		      "Cell"
       Dimension		      1
-      Cell		      "P4"
+      Cell		      "P4_simulink"
       PropName		      "logAsSpecifiedByModels_"
     }
     Array {
@@ -222,7 +222,7 @@ Model {
 	  Description		  ""
 	  Components		  []
 	  StartTime		  "0.0"
-	  StopTime		  "tfinal"
+	  StopTime		  "Tmax"
 	  AbsTol		  "auto"
 	  AutoScaleAbsTol	  on
 	  FixedStep		  "auto"
@@ -1183,9 +1183,9 @@ Model {
     }
   }
   System {
-    Name		    "P4"
-    Location		    [745, 0, 1506, 958]
-    Open		    off
+    Name		    "P4_simulink"
+    Location		    [456, 38, 1217, 731]
+    Open		    on
     PortBlocksUseCompactNotation off
     SetExecutionDomain	    off
     ExecutionDomainType	    "Deduce"
@@ -1201,190 +1201,13 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "80"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "73"
+    SIDHighWatermark	    "78"
     SimulinkSubDomain	    "Simulink"
-    Block {
-      BlockType		      SubSystem
-      Name		      "2nd order plant"
-      SID		      "12"
-      Ports		      [1, 1]
-      Position		      [415, 117, 535, 173]
-      ZOrder		      -7
-      BackgroundColor	      "red"
-      RequestExecContextInheritance off
-      System {
-	Name			"2nd order plant"
-	Location		[745, 0, 1506, 958]
-	Open			on
-	PortBlocksUseCompactNotation off
-	SetExecutionDomain	off
-	ExecutionDomainType	"Deduce"
-	ModelBrowserVisibility	off
-	ModelBrowserWidth	200
-	ScreenColor		"white"
-	PaperOrientation	"landscape"
-	PaperPositionMode	"auto"
-	PaperType		"usletter"
-	PaperUnits		"inches"
-	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
-	TiledPageScale		1
-	ShowPageBoundaries	off
-	ZoomFactor		"100"
-	SimulinkSubDomain	"Simulink"
-	Block {
-	  BlockType		  Inport
-	  Name			  "u"
-	  SID			  "13"
-	  Position		  [-65, 88, -35, 102]
-	  ZOrder		  -1
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  Fcn
-	  Name			  "Fcn"
-	  SID			  "62"
-	  Position		  [110, 50, 170, 80]
-	  ZOrder		  9
-	  Expr			  "a*sin(u(1))-b*u(2)+c*u(3)"
-	}
-	Block {
-	  BlockType		  Integrator
-	  Name			  "Integrator1\n"
-	  SID			  "63"
-	  Ports			  [1, 1]
-	  Position		  [220, 50, 250, 80]
-	  ZOrder		  8
-	}
-	Block {
-	  BlockType		  Integrator
-	  Name			  "Integrator2\n"
-	  SID			  "64"
-	  Ports			  [1, 1]
-	  Position		  [305, 50, 335, 80]
-	  ZOrder		  10
-	  InitialCondition	  "20*pi/180"
-	}
-	Block {
-	  BlockType		  Mux
-	  Name			  "Mux"
-	  SID			  "61"
-	  Ports			  [3, 1]
-	  Position		  [50, 18, 60, 112]
-	  ZOrder		  7
-	  ShowName		  off
-	  Inputs		  "3"
-	  DisplayOption		  "bar"
-	}
-	Block {
-	  BlockType		  Outport
-	  Name			  "y=x1"
-	  SID			  "66"
-	  Position		  [410, 58, 440, 72]
-	  ZOrder		  179
-	  IconDisplay		  "Port number"
-	}
-	Line {
-	  ZOrder		  32
-	  SrcBlock		  "u"
-	  SrcPort		  1
-	  DstBlock		  "Mux"
-	  DstPort		  3
-	}
-	Line {
-	  ZOrder		  34
-	  SrcBlock		  "Mux"
-	  SrcPort		  1
-	  DstBlock		  "Fcn"
-	  DstPort		  1
-	}
-	Line {
-	  ZOrder		  35
-	  SrcBlock		  "Integrator1\n"
-	  SrcPort		  1
-	  Points		  [19, 0]
-	  Branch {
-	    ZOrder		    42
-	    Points		    [0, -77; -274, 0; 0, 77]
-	    DstBlock		    "Mux"
-	    DstPort		    2
-	  }
-	  Branch {
-	    ZOrder		    41
-	    DstBlock		    "Integrator2\n"
-	    DstPort		    1
-	  }
-	}
-	Line {
-	  ZOrder		  40
-	  SrcBlock		  "Fcn"
-	  SrcPort		  1
-	  DstBlock		  "Integrator1\n"
-	  DstPort		  1
-	}
-	Line {
-	  ZOrder		  36
-	  SrcBlock		  "Integrator2\n"
-	  SrcPort		  1
-	  Points		  [19, 0]
-	  Branch {
-	    ZOrder		    47
-	    DstBlock		    "y=x1"
-	    DstPort		    1
-	  }
-	  Branch {
-	    ZOrder		    43
-	    Points		    [0, -101; -334, 0; 0, 71]
-	    DstBlock		    "Mux"
-	    DstPort		    1
-	  }
-	}
-	Annotation {
-	  SID			  "70"
-	  Name			  "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html"
-	  "><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</styl"
-	  "e></head><body style=\" font-family:'Helvetica'; font-size:10px; font-weight:400; font-style:normal;\">\n<p style=\""
-	  " margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span"
-	  " style=\" font-size:8px;\">x2=dx1</span></p></body></html>"
-	  Position		  [264, 69, 291, 80]
-	  InternalMargins	  [0, 0, 0, 0]
-	  HorizontalAlignment	  "left"
-	  VerticalAlignment	  "top"
-	  Interpreter		  "rich"
-	}
-	Annotation {
-	  SID			  "69"
-	  Name			  "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html"
-	  "><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</styl"
-	  "e></head><body style=\" font-family:'Helvetica'; font-size:10px; font-weight:400; font-style:normal;\">\n<p style=\""
-	  " margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span"
-	  " style=\" font-size:8px;\">dx2</span></p></body></html>"
-	  Position		  [187, 69, 202, 80]
-	  InternalMargins	  [0, 0, 0, 0]
-	  HorizontalAlignment	  "left"
-	  VerticalAlignment	  "top"
-	  Interpreter		  "rich"
-	}
-	Annotation {
-	  SID			  "71"
-	  Name			  "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html"
-	  "><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</styl"
-	  "e></head><body style=\" font-family:'Helvetica'; font-size:10px; font-weight:400; font-style:normal;\">\n<p style=\""
-	  " margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span"
-	  " style=\" font-size:8px;\">x1</span></p></body></html>"
-	  Position		  [350, 69, 360, 80]
-	  InternalMargins	  [0, 0, 0, 0]
-	  HorizontalAlignment	  "left"
-	  VerticalAlignment	  "top"
-	  Interpreter		  "rich"
-	  ZOrder		  -1
-	}
-      }
-    }
     Block {
       BlockType		      Clock
       Name		      "Clock"
       SID		      "33"
-      Position		      [40, 20, 60, 40]
+      Position		      [40, -5, 60, 15]
       ZOrder		      2
     }
     Block {
@@ -1402,8 +1225,19 @@ Model {
       BlockType		      Gain
       Name		      "Gain"
       SID		      "73"
-      Position		      [630, 120, 690, 170]
+      Position		      [640, 45, 700, 95]
       ZOrder		      16
+      Gain		      "180/pi"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via internal rule"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "Gain1"
+      SID		      "78"
+      Position		      [135, 55, 195, 105]
+      ZOrder		      18
       Gain		      "180/pi"
       ParamDataTypeStr	      "Inherit: Inherit via internal rule"
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
@@ -1434,7 +1268,7 @@ Model {
       }
       System {
 	Name			"MPCController"
-	Location		[295, 204, 1127, 725]
+	Location		[745, 0, 1506, 958]
 	Open			off
 	PortBlocksUseCompactNotation off
 	SetExecutionDomain	off
@@ -1627,15 +1461,26 @@ Model {
       }
     }
     Block {
+      BlockType		      Mux
+      Name		      "Mux"
+      SID		      "77"
+      Ports		      [2, 1]
+      Position		      [625, 116, 630, 174]
+      ZOrder		      17
+      ShowName		      off
+      Inputs		      "2"
+      DisplayOption	      "bar"
+    }
+    Block {
       BlockType		      SignalGenerator
       Name		      "Signal\nGenerator"
       SID		      "34"
       Ports		      [0, 1]
-      Position		      [40, 125, 70, 155]
+      Position		      [35, 125, 65, 155]
       ZOrder		      3
       WaveForm		      "square"
-      Amplitude		      "0"
-      Units		      "rad/sec"
+      Amplitude		      "ref_amp"
+      Frequency		      "ref_freq"
     }
     Block {
       BlockType		      Terminator
@@ -1649,9 +1494,9 @@ Model {
       Name		      "To Workspace"
       SID		      "32"
       Ports		      [1]
-      Position		      [730, 130, 790, 160]
+      Position		      [745, 55, 805, 85]
       ZOrder		      1
-      VariableName	      "yout"
+      VariableName	      "theta"
       MaxDataPoints	      "inf"
       FixptAsFi		      on
       SampleTime	      "-1"
@@ -1661,7 +1506,7 @@ Model {
       Name		      "To Workspace1"
       SID		      "35"
       Ports		      [1]
-      Position		      [125, 15, 185, 45]
+      Position		      [125, -10, 185, 20]
       ZOrder		      4
       VariableName	      "kt"
       MaxDataPoints	      "inf"
@@ -1677,6 +1522,7 @@ Model {
       ZOrder		      5
       VariableName	      "uout"
       MaxDataPoints	      "inf"
+      SaveFormat	      "Structure With Time"
       FixptAsFi		      on
       SampleTime	      "-1"
     }
@@ -1685,7 +1531,7 @@ Model {
       Name		      "To Workspace3"
       SID		      "40"
       Ports		      [1]
-      Position		      [170, 65, 230, 95]
+      Position		      [235, 65, 295, 95]
       ZOrder		      6
       VariableName	      "rout"
       MaxDataPoints	      "inf"
@@ -1701,6 +1547,200 @@ Model {
       BlockMirror	      on
       NamePlacement	      "alternate"
       SampleTime	      "h"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "plant"
+      SID		      "12"
+      Ports		      [1, 2]
+      Position		      [415, 117, 535, 173]
+      ZOrder		      -7
+      BackgroundColor	      "red"
+      RequestExecContextInheritance off
+      System {
+	Name			"plant"
+	Location		[456, 38, 1217, 731]
+	Open			off
+	PortBlocksUseCompactNotation off
+	SetExecutionDomain	off
+	ExecutionDomainType	"Deduce"
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	SimulinkSubDomain	"Simulink"
+	Block {
+	  BlockType		  Inport
+	  Name			  "u"
+	  SID			  "74"
+	  Position		  [-70, 88, -40, 102]
+	  ZOrder		  180
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Fcn
+	  Name			  "Fcn"
+	  SID			  "62"
+	  Position		  [110, 50, 170, 80]
+	  ZOrder		  9
+	  Expr			  "a*sin(u(1))-b*u(2)+c*u(3)"
+	}
+	Block {
+	  BlockType		  Integrator
+	  Name			  "Integrator1\n"
+	  SID			  "63"
+	  Ports			  [1, 1]
+	  Position		  [220, 50, 250, 80]
+	  ZOrder		  8
+	}
+	Block {
+	  BlockType		  Integrator
+	  Name			  "Integrator2\n"
+	  SID			  "64"
+	  Ports			  [1, 1]
+	  Position		  [305, 50, 335, 80]
+	  ZOrder		  10
+	  InitialCondition	  "theta0"
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  SID			  "61"
+	  Ports			  [3, 1]
+	  Position		  [50, 18, 60, 112]
+	  ZOrder		  7
+	  ShowName		  off
+	  Inputs		  "3"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "y1=x1"
+	  SID			  "66"
+	  Position		  [410, 58, 440, 72]
+	  ZOrder		  179
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "y2=x2"
+	  SID			  "76"
+	  Position		  [410, 118, 440, 132]
+	  ZOrder		  182
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  ZOrder		  49
+	  SrcBlock		  "u"
+	  SrcPort		  1
+	  DstBlock		  "Mux"
+	  DstPort		  3
+	}
+	Line {
+	  ZOrder		  34
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  DstBlock		  "Fcn"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  35
+	  SrcBlock		  "Integrator1\n"
+	  SrcPort		  1
+	  Points		  [19, 0]
+	  Branch {
+	    ZOrder		    60
+	    Points		    [0, 60]
+	    DstBlock		    "y2=x2"
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    42
+	    Points		    [0, -77; -274, 0; 0, 77]
+	    DstBlock		    "Mux"
+	    DstPort		    2
+	  }
+	  Branch {
+	    ZOrder		    41
+	    DstBlock		    "Integrator2\n"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  ZOrder		  40
+	  SrcBlock		  "Fcn"
+	  SrcPort		  1
+	  DstBlock		  "Integrator1\n"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  36
+	  SrcBlock		  "Integrator2\n"
+	  SrcPort		  1
+	  Points		  [19, 0]
+	  Branch {
+	    ZOrder		    47
+	    DstBlock		    "y1=x1"
+	    DstPort		    1
+	  }
+	  Branch {
+	    ZOrder		    43
+	    Points		    [0, -101; -334, 0; 0, 71]
+	    DstBlock		    "Mux"
+	    DstPort		    1
+	  }
+	}
+	Annotation {
+	  SID			  "70"
+	  Name			  "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html"
+	  "><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</styl"
+	  "e></head><body style=\" font-family:'Helvetica'; font-size:10px; font-weight:400; font-style:normal;\">\n<p style=\""
+	  " margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span"
+	  " style=\" font-size:8px;\">x2=dx1</span></p></body></html>"
+	  Position		  [264, 69, 291, 80]
+	  InternalMargins	  [0, 0, 0, 0]
+	  HorizontalAlignment	  "left"
+	  VerticalAlignment	  "top"
+	  Interpreter		  "rich"
+	  ZOrder		  -1
+	}
+	Annotation {
+	  SID			  "69"
+	  Name			  "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html"
+	  "><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</styl"
+	  "e></head><body style=\" font-family:'Helvetica'; font-size:10px; font-weight:400; font-style:normal;\">\n<p style=\""
+	  " margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span"
+	  " style=\" font-size:8px;\">dx2</span></p></body></html>"
+	  Position		  [179, 69, 194, 80]
+	  InternalMargins	  [0, 0, 0, 0]
+	  HorizontalAlignment	  "left"
+	  VerticalAlignment	  "top"
+	  Interpreter		  "rich"
+	  ZOrder		  -2
+	}
+	Annotation {
+	  SID			  "71"
+	  Name			  "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html"
+	  "><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</styl"
+	  "e></head><body style=\" font-family:'Helvetica'; font-size:10px; font-weight:400; font-style:normal;\">\n<p style=\""
+	  " margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span"
+	  " style=\" font-size:8px;\">x1</span></p></body></html>"
+	  Position		  [350, 69, 360, 80]
+	  InternalMargins	  [0, 0, 0, 0]
+	  HorizontalAlignment	  "left"
+	  VerticalAlignment	  "top"
+	  Interpreter		  "rich"
+	  ZOrder		  -1
+	}
+      }
     }
     Line {
       ZOrder		      11
@@ -1730,7 +1770,7 @@ Model {
       Points		      [44, 0]
       Branch {
 	ZOrder			53
-	DstBlock		"2nd order plant"
+	DstBlock		"plant"
 	DstPort			1
       }
       Branch {
@@ -1744,33 +1784,16 @@ Model {
       ZOrder		      69
       SrcBlock		      "Signal\nGenerator"
       SrcPort		      1
-      Points		      [40, 0]
+      Points		      [38, 0]
       Branch {
-	ZOrder			72
+	ZOrder			129
 	Points			[0, -60]
-	DstBlock		"To Workspace3"
+	DstBlock		"Gain1"
 	DstPort			1
       }
       Branch {
-	ZOrder			71
+	ZOrder			128
 	DstBlock		"MPCController"
-	DstPort			1
-      }
-    }
-    Line {
-      ZOrder		      115
-      SrcBlock		      "2nd order plant"
-      SrcPort		      1
-      Points		      [40, 0]
-      Branch {
-	ZOrder			117
-	Points			[0, 95]
-	DstBlock		"Zero-Order\nHold"
-	DstPort			1
-      }
-      Branch {
-	ZOrder			116
-	DstBlock		"Gain"
 	DstPort			1
       }
     }
@@ -1787,6 +1810,45 @@ Model {
       SrcBlock		      "Gain"
       SrcPort		      1
       DstBlock		      "To Workspace"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      121
+      SrcBlock		      "plant"
+      SrcPort		      1
+      Points		      [48, 0]
+      Branch {
+	ZOrder			126
+	DstBlock		"Mux"
+	DstPort			1
+      }
+      Branch {
+	ZOrder			125
+	Points			[0, -60]
+	DstBlock		"Gain"
+	DstPort			1
+      }
+    }
+    Line {
+      ZOrder		      124
+      SrcBlock		      "plant"
+      SrcPort		      2
+      DstBlock		      "Mux"
+      DstPort		      2
+    }
+    Line {
+      ZOrder		      127
+      SrcBlock		      "Mux"
+      SrcPort		      1
+      Points		      [19, 0; 0, 95]
+      DstBlock		      "Zero-Order\nHold"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      130
+      SrcBlock		      "Gain1"
+      SrcPort		      1
+      DstBlock		      "To Workspace3"
       DstPort		      1
     }
   }
