@@ -7,15 +7,13 @@ path(path,'../')
 tfinal=9; % duration of the simulation (s)
 
 %__________________________________________________________________________
-% Parameters of the continuous 2nd order linear process
-
 % Parameters of the discrete model
 
 h=0.1; % sampling period (s)
 
 Ap=1.2;
 Bp=1;
-Cp=1;   %Assumes access to the state as output
+Cp=1;
 Dp=0;
 
 % Model used by MPC
@@ -50,8 +48,8 @@ du_max=100;
 z_min=-10000;
 z_max=10000;
 
-Q=1000;   %1*eye(2);
-R=10000; %0.00001;
+Q=1000;  
+R=10000;
 
 W=[]; % state estimator not used
 V=[]; % 
@@ -104,7 +102,8 @@ for i=1:length(u_min_vector)
     xlabel('time (s)');
     ylabel('u');
 end
-legend(strcat('|u|_{max}=',num2str(u_max_vector')),'Location','SouthEast')
+subplot(2,1,1)
+legend(strcat('|u|_{max}=',num2str(u_max_vector')),'Location','NorthWest')
 % instavel a partir umax umin +/-0.22
 
 u_min=-100;
@@ -140,7 +139,8 @@ for i=1:length(du_min_vector)
     xlabel('time (s)');
     ylabel('u');
 end
-legend(strcat('|\Delta u|_{max}=',num2str(du_max_vector')),'Location','SouthEast')
+subplot(2,1,1)
+legend(strcat('|\Delta u|_{max}=',num2str(du_max_vector')),'Location','NorthWest')
 % instável a partir dumax dumin +/-0.1
 
 du_min=-100;
@@ -176,7 +176,8 @@ for i=1:length(z_min_vector)
     xlabel('time (s)');
     ylabel('u');
 end
-legend(strcat('|z|_{max}=',num2str(z_max_vector')),'Location','SouthEast')
+subplot(2,1,1)
+legend(strcat('|z|_{max}=',num2str(z_max_vector')),'Location','NorthWest')
 z_min=-10000;
 z_max=10000;
 
@@ -210,7 +211,8 @@ for i=1:length(Q_vector)
     xlabel('time (s)');
     ylabel('u');
 end
-legend(strcat('R=',num2str(R_vector'),'Location','SouthEast'))
+subplot(2,1,1)
+legend(strcat('R=',num2str(R_vector')),'Location','NorthWest')
 % instavel a partir Q=1 R=150 => R/Q > 150 instavel
 
 Q=1000;
@@ -245,7 +247,8 @@ for i=1:length(Hp_vector)
     xlabel('time (s)');
     ylabel('u');
 end
-legend(strcat('H_p=',num2str(Hp_vector')),'Location','SouthEast')
+subplot(2,1,1)
+legend(strcat('H_p=',num2str(Hp_vector')),'Location','NorthWest')
 clear Hp_vector
 
 u_min=-0.45;
@@ -291,7 +294,8 @@ for i=1:length(Hp_vector)
     xlabel('time (s)');
     ylabel('u');
 end
-legend(strcat('H_p=',num2str(Hp_vector')),'Location','SouthEast')
+subplot(2,1,1)
+legend(strcat('H_p=',num2str(Hp_vector')),'Location','NorthWest')
 % a partir de H=100 existe problemas nas funçoes do MPC para esta
 % configuração
 
