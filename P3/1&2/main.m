@@ -73,6 +73,7 @@ R_vector=[1,0.1,0.001,10,100];
 
 Hp_vector=[2,3,50];
 
+cores=['b' 'm' 'g' 'y' 'c'];
 
 for i=1:length(u_min_vector)
     clear md u_min u_max kt yout uout
@@ -89,21 +90,21 @@ for i=1:length(u_min_vector)
     % Plots the output and the reference
     figure(1)
     subplot(2,1,1)
-    
-    plot(kt,yout);
+    plot(kt,yout,cores(i))
     hold on
+    
     plot(kt,rout,'r');
     xlabel('time (s)');
     ylabel('y');
-
     % Plots the control variable
     subplot(2,1,2)
 
-    stairs(kt,uout);
+    stairs(kt,uout,cores(i));
     hold on
     xlabel('time (s)');
     ylabel('u');
 end
+legend(strcat('|u|_{max}=',num2str(u_max_vector')),'Location','SouthEast')
 % instavel a partir umax umin +/-0.22
 
 u_min=-100;
@@ -125,7 +126,7 @@ for i=1:length(du_min_vector)
     figure(2)
     subplot(2,1,1)
     
-    plot(kt,yout);
+    plot(kt,yout,cores(i));
     hold on
     plot(kt,rout,'r');
     xlabel('time (s)');
@@ -134,11 +135,12 @@ for i=1:length(du_min_vector)
     % Plots the control variable
     subplot(2,1,2)
 
-    stairs(kt,uout);
+    stairs(kt,uout,cores(i));
     hold on
     xlabel('time (s)');
     ylabel('u');
 end
+legend(strcat('|\Delta u|_{max}=',num2str(du_max_vector')),'Location','SouthEast')
 % instável a partir dumax dumin +/-0.1
 
 du_min=-100;
@@ -160,7 +162,7 @@ for i=1:length(z_min_vector)
     figure(3)
     subplot(2,1,1)
     
-    plot(kt,yout);
+    plot(kt,yout,cores(i));
     hold on
     plot(kt,rout,'r');
     xlabel('time (s)');
@@ -169,12 +171,12 @@ for i=1:length(z_min_vector)
     % Plots the control variable
     subplot(2,1,2)
 
-    stairs(kt,uout);
+    stairs(kt,uout,cores(i));
     hold on
     xlabel('time (s)');
     ylabel('u');
 end
-
+legend(strcat('|z|_{max}=',num2str(z_max_vector')),'Location','SouthEast')
 z_min=-10000;
 z_max=10000;
 
@@ -194,7 +196,7 @@ for i=1:length(Q_vector)
     figure(4)
     subplot(2,1,1)
     
-    plot(kt,yout);
+    plot(kt,yout,cores(i));
     hold on
     plot(kt,rout,'r');
     xlabel('time (s)');
@@ -203,11 +205,12 @@ for i=1:length(Q_vector)
     % Plots the control variable
     subplot(2,1,2)
 
-    stairs(kt,uout);
+    stairs(kt,uout,cores(i));
     hold on
     xlabel('time (s)');
     ylabel('u');
 end
+legend(strcat('R=',num2str(R_vector'),'Location','SouthEast'))
 % instavel a partir Q=1 R=150 => R/Q > 150 instavel
 
 Q=1000;
@@ -228,7 +231,7 @@ for i=1:length(Hp_vector)
     figure(5)
     subplot(2,1,1)
     
-    plot(kt,yout);
+    plot(kt,yout,cores(i));
     hold on
     plot(kt,rout,'r');
     xlabel('time (s)');
@@ -237,11 +240,12 @@ for i=1:length(Hp_vector)
     % Plots the control variable
     subplot(2,1,2)
 
-    stairs(kt,uout);
+    stairs(kt,uout,cores(i));
     hold on
     xlabel('time (s)');
     ylabel('u');
 end
+legend(strcat('H_p=',num2str(Hp_vector')),'Location','SouthEast')
 clear Hp_vector
 
 u_min=-0.45;
@@ -273,7 +277,7 @@ for i=1:length(Hp_vector)
     figure(6)
     subplot(2,1,1)
     
-    plot(kt,yout);
+    plot(kt,yout,cores(i));
     hold on
     plot(kt,rout,'r');
     xlabel('time (s)');
@@ -282,11 +286,12 @@ for i=1:length(Hp_vector)
     % Plots the control variable
     subplot(2,1,2)
 
-    stairs(kt,uout);
+    stairs(kt,uout,cores(i));
     hold on
     xlabel('time (s)');
     ylabel('u');
 end
+legend(strcat('H_p=',num2str(Hp_vector')),'Location','SouthEast')
 % a partir de H=100 existe problemas nas funçoes do MPC para esta
 % configuração
 
