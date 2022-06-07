@@ -71,7 +71,7 @@ R_vector=[1,0.1,0.001,10,100];
 
 Hp_vector=[2,3,50];
 
-cores=['b' 'm' 'g' 'y' 'c'];
+p_colors=['b' 'r' 'g' 'c' 'm'];
 
 for i=1:length(u_min_vector)
     clear md u_min u_max kt yout uout
@@ -88,26 +88,29 @@ for i=1:length(u_min_vector)
     % Plots the output and the reference
     figure(1)
     subplot(2,1,1)
-    plot(kt,yout,cores(i))
+    plot(kt,yout,p_colors(i))
     hold on
-    
-    plot(kt,rout,'r');
     xlabel('time (s)');
     ylabel('y');
+
     % Plots the control variable
     subplot(2,1,2)
-
-    stairs(kt,uout,cores(i));
+    stairs(kt,uout,p_colors(i));
     hold on
     xlabel('time (s)');
     ylabel('u');
 end
-subplot(2,1,1)
-legend(strcat('|u|_{max}=',num2str(u_max_vector')),'Location','NorthWest')
 % instavel a partir umax umin +/-0.22
+subplot(2,1,1)
+plot(kt,rout,'k');
+legendStrings = "|u| < " + string(u_max_vector);
+legendStrings(end+1) = "Reference";
+legend(legendStrings,'Location','NorthWest');
+
 
 u_min=-100;
 u_max=100;
+clear legendStrings
 
 for i=1:length(du_min_vector)
     clear md du_min du_max kt yout uout
@@ -125,26 +128,29 @@ for i=1:length(du_min_vector)
     figure(2)
     subplot(2,1,1)
     
-    plot(kt,yout,cores(i));
+    plot(kt,yout,p_colors(i));
     hold on
-    plot(kt,rout,'r');
     xlabel('time (s)');
     ylabel('y');
 
     % Plots the control variable
     subplot(2,1,2)
-
-    stairs(kt,uout,cores(i));
+    stairs(kt,uout,p_colors(i));
     hold on
     xlabel('time (s)');
     ylabel('u');
 end
-subplot(2,1,1)
-legend(strcat('|\Delta u|_{max}=',num2str(du_max_vector')),'Location','NorthWest')
 % instável a partir dumax dumin +/-0.1
+subplot(2,1,1)
+plot(kt,rout,'k');
+legendStrings = "|\Delta u| < " + string(du_max_vector);
+legendStrings(end+1) = "Reference";
+legend(legendStrings,'Location','NorthWest');
+
 
 du_min=-100;
 du_max=100;
+clear legendStrings
 
 for i=1:length(z_min_vector)
     clear md z_min z_max kt yout uout
@@ -161,25 +167,28 @@ for i=1:length(z_min_vector)
     % Plots the output and the reference
     figure(3)
     subplot(2,1,1)
-    
-    plot(kt,yout,cores(i));
+    plot(kt,yout,p_colors(i));
     hold on
-    plot(kt,rout,'r');
     xlabel('time (s)');
     ylabel('y');
 
     % Plots the control variable
     subplot(2,1,2)
-
-    stairs(kt,uout,cores(i));
+    stairs(kt,uout,p_colors(i));
     hold on
     xlabel('time (s)');
     ylabel('u');
 end
 subplot(2,1,1)
-legend(strcat('|z|_{max}=',num2str(z_max_vector')),'Location','NorthWest')
+plot(kt,rout,'k');
+legendStrings = "|z| < " + string(z_max_vector);
+legendStrings(end+1) = "Reference";
+legend(legendStrings,'Location','NorthWest');
+
+
 z_min=-10000;
 z_max=10000;
+clear legendStrings
 
 for i=1:length(Q_vector)
     clear md Q R kt yout uout
@@ -196,27 +205,29 @@ for i=1:length(Q_vector)
     % Plots the output and the reference
     figure(4)
     subplot(2,1,1)
-    
-    plot(kt,yout,cores(i));
+    plot(kt,yout,p_colors(i));
     hold on
-    plot(kt,rout,'r');
     xlabel('time (s)');
     ylabel('y');
 
     % Plots the control variable
     subplot(2,1,2)
-
-    stairs(kt,uout,cores(i));
+    stairs(kt,uout,p_colors(i));
     hold on
     xlabel('time (s)');
     ylabel('u');
 end
-subplot(2,1,1)
-legend(strcat('R=',num2str(R_vector')),'Location','NorthWest')
 % instavel a partir Q=1 R=150 => R/Q > 150 instavel
+subplot(2,1,1)
+plot(kt,rout,'k');
+legendStrings = "R = " + string(R_vector);
+legendStrings(end+1) = "Reference";
+legend(legendStrings,'Location','NorthWest');
+
 
 Q=1000;
 R=10000;
+clear legendStrings
 
 for i=1:length(Hp_vector)
     clear md Hp kt yout uout
@@ -231,25 +242,29 @@ for i=1:length(Hp_vector)
     
     % Plots the output and the reference
     figure(5)
-    subplot(2,1,1)
-    
-    plot(kt,yout,cores(i));
+    subplot(2,1,1)    
+    plot(kt,yout,p_colors(i));
     hold on
-    plot(kt,rout,'r');
     xlabel('time (s)');
     ylabel('y');
 
     % Plots the control variable
     subplot(2,1,2)
-
-    stairs(kt,uout,cores(i));
+    stairs(kt,uout,p_colors(i));
     hold on
     xlabel('time (s)');
     ylabel('u');
 end
 subplot(2,1,1)
-legend(strcat('H_p=',num2str(Hp_vector')),'Location','NorthWest')
+plot(kt,rout,'k');
+legendStrings = "H_p = " + string(Hp_vector);
+legendStrings(end+1) = "Reference";
+legend(legendStrings,'Location','NorthWest');
 clear Hp_vector
+clear legendStrings
+
+
+%%%%%%%%% Pergunta 2
 
 u_min=-0.45;
 u_max=0.45;
@@ -279,24 +294,24 @@ for i=1:length(Hp_vector)
     % Plots the output and the reference
     figure(6)
     subplot(2,1,1)
-    
-    plot(kt,yout,cores(i));
+    plot(kt,yout,p_colors(i));
     hold on
-    plot(kt,rout,'r');
     xlabel('time (s)');
     ylabel('y');
 
     % Plots the control variable
     subplot(2,1,2)
-
-    stairs(kt,uout,cores(i));
+    stairs(kt,uout,p_colors(i));
     hold on
     xlabel('time (s)');
     ylabel('u');
 end
-subplot(2,1,1)
-legend(strcat('H_p=',num2str(Hp_vector')),'Location','NorthWest')
 % a partir de H=100 existe problemas nas funçoes do MPC para esta
 % configuração
+subplot(2,1,1)
+plot(kt,rout,'k');
+legendStrings = "H_p = " + string(Hp_vector);
+legendStrings(end+1) = "Reference";
+legend(legendStrings,'Location','NorthWest');
 
     
