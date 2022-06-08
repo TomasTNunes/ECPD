@@ -103,6 +103,7 @@ end
 % instavel a partir umax umin +/-0.22
 subplot(2,1,1)
 plot(kt,rout,'k');
+title("Effect of varying maximum |u| on x(k+1) = 1,2x(k) + u(k)");
 legendStrings = "|u| < " + string(u_max_vector);
 legendStrings(end+1) = "Reference";
 legend(legendStrings,'Location','NorthWest');
@@ -143,6 +144,7 @@ end
 % instável a partir dumax dumin +/-0.1
 subplot(2,1,1)
 plot(kt,rout,'k');
+title("Effect of varying maximum |\Delta u| on x(k+1) = 1,2x(k) + u(k)");
 legendStrings = "|\Delta u| < " + string(du_max_vector);
 legendStrings(end+1) = "Reference";
 legend(legendStrings,'Location','NorthWest');
@@ -181,6 +183,7 @@ for i=1:length(z_min_vector)
 end
 subplot(2,1,1)
 plot(kt,rout,'k');
+title("Effect of varying maximum |z| on x(k+1) = 1,2x(k) + u(k)");
 legendStrings = "|z| < " + string(z_max_vector);
 legendStrings(end+1) = "Reference";
 legend(legendStrings,'Location','NorthWest');
@@ -220,6 +223,7 @@ end
 % instavel a partir Q=1 R=150 => R/Q > 150 instavel
 subplot(2,1,1)
 plot(kt,rout,'k');
+title("Effect of varying R with fixed Q on x(k+1) = 1,2x(k) + u(k)");
 legendStrings = "R = " + string(R_vector);
 legendStrings(end+1) = "Reference";
 legend(legendStrings,'Location','NorthWest');
@@ -257,6 +261,7 @@ for i=1:length(Hp_vector)
 end
 subplot(2,1,1)
 plot(kt,rout,'k');
+title("Effect of varying Hp on x(k+1) = 1,2x(k) + u(k)");
 legendStrings = "H_p = " + string(Hp_vector);
 legendStrings(end+1) = "Reference";
 legend(legendStrings,'Location','NorthWest');
@@ -273,7 +278,7 @@ du_min=-0.13;
 du_max=0.13;
 
 z_min=-1.5;
-z_max=2;
+z_max=1.5;      % estava a 2   
 
 Q=1;
 R=100;
@@ -310,6 +315,7 @@ end
 % configuração
 subplot(2,1,1)
 plot(kt,rout,'k');
+title("x(k+1) = 1,2x(k) + u(k), |u| < 0.45, |\Delta u| < 0.13, |z| < 1.5, Q = 1, R = 100")
 legendStrings = "H_p = " + string(Hp_vector);
 legendStrings(end+1) = "Reference";
 legend(legendStrings,'Location','NorthWest');
