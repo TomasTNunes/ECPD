@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.67"
+    ComputedModelVersion    "1.68"
     NumModelReferences	    0
     NumTestPointedSignals   0
     NumProvidedFunctions    0
@@ -46,7 +46,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [531.0, 180.0, 832.0, 521.0]
+      Location		      [35.0, 188.0, 825.0, 532.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -62,7 +62,7 @@ Model {
 	$PropName		"ExplorerBarInfo"
 	$ObjectID		4
 	$ClassName		"Simulink.ExplorerBarInfo"
-	Visible			[1]
+	Visible			[0]
       }
       Object {
 	$PropName		"EditorsInfo"
@@ -71,9 +71,9 @@ Model {
 	IsActive		[1]
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
-	Extents			[1568.0, 725.0]
+	Extents			[1554.0, 807.0]
 	ZoomFactor		[1.0]
-	Offset			[-21.5, -64.875]
+	Offset			[-57.997997329773, -91.597546728971935]
       }
       Object {
 	$PropName		"DockComponentsInfo"
@@ -94,11 +94,11 @@ Model {
       "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
       "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAAD0AP///wAAAAEAAAAAAAAAAPwCA"
       "AAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZ"
-      "QBjAHQAbwByAAAAAAD/////AAADVAD///8AAAZmAAADNwAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
+      "QBjAHQAbwByAAAAAAD/////AAADVAD///8AAAZYAAADTQAAAAEAAAACAAAAAQAAAAL8AAAAAQAAAAIAAAAP/////wAAAAAA/////wAAAAAAAAAA/"
       "////wEAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/"
       "////wEAAADb/////wAAAAAAAAAA/////wEAAAGG/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAJh/////wAAAAAAAAAA/"
-      "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAW8/////wAAAAAAAAAA/"
-      "////wEAAAYR/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA"
+      "////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA/////wEAAAWu/////wAAAAAAAAAA/"
+      "////wEAAAYD/////wAAAAAAAAAA/////wAAAAAA/////wAAAAAAAAAA"
     }
   }
   HideAutomaticNames	  on
@@ -108,9 +108,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "tomas"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon May 30 17:44:26 2022"
-  RTWModifiedTimeStamp	  575833455
-  ModelVersionFormat	  "1.%<AutoIncrement:67>"
+  LastModifiedDate	  "Sun Jun 12 02:58:50 2022"
+  RTWModifiedTimeStamp	  576903522
+  ModelVersionFormat	  "1.%<AutoIncrement:68>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "none"
@@ -1154,7 +1154,7 @@ Model {
   }
   System {
     Name		    "Prob1_2_simulink"
-    Location		    [531, 180, 1363, 701]
+    Location		    [35, 188, 860, 720]
     Open		    on
     PortBlocksUseCompactNotation off
     SetExecutionDomain	    off
@@ -1173,78 +1173,6 @@ Model {
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "60"
     SimulinkSubDomain	    "Simulink"
-    Block {
-      BlockType		      SubSystem
-      Name		      "2nd order plant"
-      SID		      "12"
-      Ports		      [1, 1]
-      Position		      [385, 118, 505, 172]
-      ZOrder		      -7
-      BackgroundColor	      "red"
-      RequestExecContextInheritance off
-      System {
-	Name			"2nd order plant"
-	Location		[295, 204, 1127, 725]
-	Open			off
-	PortBlocksUseCompactNotation off
-	SetExecutionDomain	off
-	ExecutionDomainType	"Deduce"
-	ModelBrowserVisibility	off
-	ModelBrowserWidth	200
-	ScreenColor		"white"
-	PaperOrientation	"landscape"
-	PaperPositionMode	"auto"
-	PaperType		"usletter"
-	PaperUnits		"inches"
-	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
-	TiledPageScale		1
-	ShowPageBoundaries	off
-	ZoomFactor		"100"
-	SimulinkSubDomain	"Simulink"
-	Block {
-	  BlockType		  Inport
-	  Name			  "u"
-	  SID			  "13"
-	  Position		  [30, 73, 60, 87]
-	  ZOrder		  -1
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  DiscreteStateSpace
-	  Name			  "Discrete State-Space"
-	  SID			  "41"
-	  Position		  [175, 46, 305, 114]
-	  ZOrder		  4
-	  A			  "Ap"
-	  B			  "Bp"
-	  C			  "Cp"
-	  D			  "Dp"
-	  SampleTime		  "h"
-	}
-	Block {
-	  BlockType		  Outport
-	  Name			  "y"
-	  SID			  "24"
-	  Position		  [430, 73, 460, 87]
-	  ZOrder		  -12
-	  IconDisplay		  "Port number"
-	}
-	Line {
-	  ZOrder		  30
-	  SrcBlock		  "Discrete State-Space"
-	  SrcPort		  1
-	  DstBlock		  "y"
-	  DstPort		  1
-	}
-	Line {
-	  ZOrder		  31
-	  SrcBlock		  "u"
-	  SrcPort		  1
-	  DstBlock		  "Discrete State-Space"
-	  DstPort		  1
-	}
-      }
-    }
     Block {
       BlockType		      Clock
       Name		      "Clock"
@@ -1288,7 +1216,7 @@ Model {
       }
       System {
 	Name			"MPCController"
-	Location		[295, 204, 1127, 725]
+	Location		[35, 188, 860, 720]
 	Open			off
 	PortBlocksUseCompactNotation off
 	SetExecutionDomain	off
@@ -1481,6 +1409,78 @@ Model {
       }
     }
     Block {
+      BlockType		      SubSystem
+      Name		      "Plant"
+      SID		      "12"
+      Ports		      [1, 1]
+      Position		      [385, 118, 505, 172]
+      ZOrder		      -7
+      BackgroundColor	      "red"
+      RequestExecContextInheritance off
+      System {
+	Name			"Plant"
+	Location		[274, 127, 1099, 659]
+	Open			off
+	PortBlocksUseCompactNotation off
+	SetExecutionDomain	off
+	ExecutionDomainType	"Deduce"
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	SimulinkSubDomain	"Simulink"
+	Block {
+	  BlockType		  Inport
+	  Name			  "u"
+	  SID			  "13"
+	  Position		  [30, 73, 60, 87]
+	  ZOrder		  -1
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  DiscreteStateSpace
+	  Name			  "Discrete State-Space"
+	  SID			  "41"
+	  Position		  [175, 46, 305, 114]
+	  ZOrder		  4
+	  A			  "Ap"
+	  B			  "Bp"
+	  C			  "Cp"
+	  D			  "Dp"
+	  SampleTime		  "h"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "y"
+	  SID			  "24"
+	  Position		  [430, 73, 460, 87]
+	  ZOrder		  -12
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  ZOrder		  30
+	  SrcBlock		  "Discrete State-Space"
+	  SrcPort		  1
+	  DstBlock		  "y"
+	  DstPort		  1
+	}
+	Line {
+	  ZOrder		  31
+	  SrcBlock		  "u"
+	  SrcPort		  1
+	  DstBlock		  "Discrete State-Space"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
       BlockType		      SignalGenerator
       Name		      "Signal\nGenerator"
       SID		      "34"
@@ -1547,7 +1547,7 @@ Model {
     }
     Line {
       ZOrder		      8
-      SrcBlock		      "2nd order plant"
+      SrcBlock		      "Plant"
       SrcPort		      1
       Points		      [48, 0]
       Branch {
@@ -1591,7 +1591,7 @@ Model {
       Points		      [41, 0]
       Branch {
 	ZOrder			53
-	DstBlock		"2nd order plant"
+	DstBlock		"Plant"
 	DstPort			1
       }
       Branch {
