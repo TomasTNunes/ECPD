@@ -72,14 +72,15 @@ md = MPCInit(Ad,Bd,Cyd,Czd,Dzd,Ccd,Dcd,Hp,Hw,zblk,Hu,ublk, ...
 	    z_min,Q,R,W,V,h,cmode,solver);
 
 % Simulation characteristics
-ref_amp = 0; % rad
-ref_freq = 1/10; % Hz
-theta0 = 20 * pi/180; % inicial position(x1) in rad
+ref_amp = 10 * pi/180; % rad
+ref_step_start = 2; % s
+ref_step_time = 10; % s
+theta0 = 0 * pi/180; % inicial position(x1) in rad
 Tmax=10; % (s) Duration of the simulation
 
-
-% Simulates the controlled plant
+% Simulates the controlled plant    
 sim('P4_simulink',Tmax);
+stepinfo(theta,kt,ref_amp*180/pi,theta0*180/pi,'SettlingTimeThreshold',0.005)  % 0.005*|y_f-y_i|, 0.05% chega para ref_amp de 10º mas para outros valores pode ter de variar
 
 % Plots results
 figure()
