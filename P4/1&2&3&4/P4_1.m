@@ -1,6 +1,6 @@
 clear all
-close all
-clc
+%close all
+%clc
 path(path,'../')
 
 h=0.1; % sampling period (s)
@@ -48,17 +48,17 @@ Hu=Hp;
 zblk=1;
 ublk=1;
 
-u_min=-100;
-u_max=100;
+u_min = -100;
+u_max = 100;
 
 du_min=-100;
 du_max=100;
 
-z_min=-100;
-z_max=100;
+z_min=-100;  % rad
+z_max=100;   % rad
 
-Q=1; 
-R=1; 
+Q=1;
+R=0.1; 
 
 W=[]; % state estimator not used
 V=[]; % 
@@ -72,15 +72,16 @@ md = MPCInit(Ad,Bd,Cyd,Czd,Dzd,Ccd,Dcd,Hp,Hw,zblk,Hu,ublk, ...
 	    z_min,Q,R,W,V,h,cmode,solver);
 
 % Simulation characteristics
-ref_amp = 10 * pi/180; % rad
-ref_step_start = 2; % s
-ref_step_time = 10; % s
-theta0 = 0 * pi/180; % inicial position(x1) in rad
+ref_amp = 0 * pi/180; % rad
+ref_step_start = 0; % s
+ref_step_time = 11; % s
+theta0 = 10 * pi/180; % inicial position(x1) in rad
 Tmax=10; % (s) Duration of the simulation
 
 % Simulates the controlled plant    
 sim('P4_simulink',Tmax);
-stepinfo(theta,kt,ref_amp*180/pi,theta0*180/pi,'SettlingTimeThreshold',0.005)  % 0.005*|y_f-y_i|, 0.05% chega para ref_amp de 10º mas para outros valores pode ter de variar
+stepinfo(-theta,kt,-ref_amp*180/pi,-theta0*180/pi,'SettlingTimeThreshold',0.005)  % 0.005*|y_f-y_i|, 0.05% chega para ref_amp de 10º mas para outros valores pode ter de variar
+%stepinfo(theta,kt,ref_amp*180/pi,theta0*180/pi,'SettlingTimeThreshold',0.005)
 
 % Plots results
 figure()
@@ -88,14 +89,15 @@ subplot(211)
 gg=plot(kt,theta,'b');
 set(gg,'LineWidth',1.5);
 hold on
-plot(kt,rout,'r')
+plot(kt,rout,'r','LineWidth',1.5)
 gg=xlabel('Time (s)');
 set(gg,'FontSize',14);
 gg=ylabel('\theta (º)');
 set(gg,'FontSize',14);
+gg=legend('\theta','\theta_{ref}','Location','NorthEast');
 
 subplot(212)
-gg=stairs(uout.time,uout.signals.values);
+gg=stairs(uout.time,uout.signals.values,'b');
 set(gg,'LineWidth',1.5);
 gg=xlabel('Time (s)');
 set(gg,'FontSize',14);
