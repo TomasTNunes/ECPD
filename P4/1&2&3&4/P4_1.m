@@ -42,23 +42,25 @@ Dcd=Dp(1);
 
 % Definition of MPC parameters
 Hw=1;
-Hp=5;   % Minimum Hp=2; corresponds to 1-step prediction horizon
+Hp=30;   % Minimum Hp=2; corresponds to 1-step prediction horizon
 Hu=Hp;
 
 zblk=1;
 ublk=1;
 
-u_min = -100;
-u_max = 100;
+% 0.22
+u_min = -0.15;
+u_max = 0.15;
 
-du_min=-100;
-du_max=100;
+% 0.085
+du_min=-0.15;
+du_max=0.15;
 
 z_min=-100;  % rad
 z_max=100;   % rad
 
 Q=1;
-R=0.1; 
+R=100;  % 0.1
 
 W=[]; % state estimator not used
 V=[]; % 
@@ -75,8 +77,8 @@ md = MPCInit(Ad,Bd,Cyd,Czd,Dzd,Ccd,Dcd,Hp,Hw,zblk,Hu,ublk, ...
 ref_amp = 0 * pi/180; % rad
 ref_step_start = 0; % s
 ref_step_time = 11; % s
-theta0 = 10 * pi/180; % inicial position(x1) in rad
-Tmax=10; % (s) Duration of the simulation
+theta0 = 30 * pi/180; % inicial position(x1) in rad
+Tmax=5; % (s) Duration of the simulation
 
 % Simulates the controlled plant    
 sim('P4_simulink',Tmax);
