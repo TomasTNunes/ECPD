@@ -70,7 +70,7 @@ solver='qp_as';
 ref_amp = 0 * pi/180; % rad
 ref_step_start = 0; % s
 ref_step_time = 11; % s
-theta0 = 10 * pi/180; % inicial position(x1) in rad
+theta0 = 30 * pi/180; % inicial position(x1) in rad
 Tmax=6; % (s) Duration of the simulation
 
 % plot cloros

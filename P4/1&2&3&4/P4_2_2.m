@@ -71,16 +71,16 @@ solver='qp_as';
 ref_amp = 0 * pi/180; % rad
 ref_step_start = 0; % s
 ref_step_time = 11; % s
-theta0 = 10 * pi/180; % inicial position(x1) in rad
+theta0 = 30 * pi/180; % inicial position(x1) in rad
 Tmax=10; % (s) Duration of the simulation
 
 for i=1:length(R_vector)
-    clear md R inf theta uout rout kt setT overs FG
+    clear md R inff theta uout rout kt setT overs FG
 
     R = R_vector(i);
     
     for ii=1:length(Hp_vector)
-        clear md inf theta uout rout kt Hp Hu 
+        clear md inff theta uout rout kt Hp Hu 
         Hp = Hp_vector(ii);
         Hu = Hp;
 
@@ -91,9 +91,9 @@ for i=1:length(R_vector)
     
         % Simulates the controlled plant    
         sim('P4_simulink',Tmax);
-        inf = stepinfo(-theta,kt,-ref_amp*180/pi,-theta0*180/pi,'SettlingTimeThreshold',0.005); % 0.005*|y_f-y_i|, 0.05% chega para ref_amp de 10º mas para outros valores pode ter de variar
-        setT(i,ii) = inf.SettlingTime;
-        overs(i,ii) = inf.Overshoot/10;
+        inff = stepinfo(-theta,kt,-ref_amp*180/pi,-theta0*180/pi,'SettlingTimeThreshold',0.002); % 0.005*|y_f-y_i|, 0.05% chega para ref_amp de 10º mas para outros valores pode ter de variar
+        setT(i,ii) = inff.SettlingTime;
+        overs(i,ii) = inff.Overshoot/100 * theta0 * 180/pi;
         FG(i,ii) = 10/(2*setT(i,ii) + overs(i,ii));
     end
 
@@ -127,7 +127,7 @@ for i=1:length(R_vector)
         xlim([i-2 25])  % Hp menores que estes dava overshhots muito altos pq era instavel
     end
 end
-clear md R Hp theta uout rout kt inf
+clear md R Hp theta uout rout kt inff
 
 Hp = 10;
 Hu=Hp;
@@ -154,7 +154,7 @@ title(sprintf('R = %s & Q = %s & H_p = %s & no constraints',string(R),string(Q),
 legend('\theta','\theta_{ref}','Location','NorthEast')
 
 subplot(212)
-stairs(uout.time,uout.signals.values,'b','LineWidth',1.5);
+stairs(uout.time,uout.signals.values,'r','LineWidth',1.5);
 xlabel('Time (s)');
 ylabel('u (N.m)');
 
@@ -178,6 +178,6 @@ title(sprintf('R = %s & Q = %s & H_p = %s & no constraints',string(R),string(Q),
 legend('\theta','\theta_{ref}','Location','NorthEast')
 
 subplot(212)
-stairs(uout.time,uout.signals.values,'b','LineWidth',1.5);
+stairs(uout.time,uout.signals.values,'r','LineWidth',1.5);
 xlabel('Time (s)');
 ylabel('u (N.m)');

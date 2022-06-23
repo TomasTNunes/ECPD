@@ -48,14 +48,8 @@ Hu=Hp;
 zblk=1;
 ublk=1;
 
-% u_min=-100;
-% u_max=100;
-% u_vector = [0.4 0.15 0.1 0.06 0.055];
-u_vector = [0.4 0.25 0.15];
 
-% du_min=-100;
-% du_max=100;
-% du_vector = [0.3 0.15 0.05 0.03];
+u_vector = [0.4 0.25 0.15];
 du_vector = [0.3 0.15 0.1 0.085];
 
 z_min=-100; % rad
@@ -75,7 +69,7 @@ ref_amp = 0 * pi/180; % rad
 ref_step_start = 0; % s
 ref_step_time = 11; % s
 theta0 = 30 * pi/180; % inicial position(x1) in rad
-Tmax=4; % (s) Duration of the simulation
+Tmax=3; % (s) Duration of the simulation
 
 % plot colors
 p_colors=['b' 'r' 'g' 'c' 'm'];
@@ -96,25 +90,32 @@ for i=1:length(u_vector)
 
     % Simulates the controlled plant    
     sim('P4_simulink',Tmax);
-    inff = stepinfo(-theta,kt,-ref_amp*180/pi,-theta0*180/pi,'SettlingTimeThreshold',0.005); % 0.005*|y_f-y_i|, 0.05% chega para ref_amp de 10º mas para outros valores pode ter de variar
+    inff = stepinfo(-theta,kt,-ref_amp*180/pi,-theta0*180/pi,'SettlingTimeThreshold',0.002); % 0.005*|y_f-y_i|, 0.05% chega para ref_amp de 10º mas para outros valores pode ter de variar
     setT(1,i) = inff.SettlingTime;
-    overs(1,i) = inff.Overshoot/10;
+    overs(1,i) = inff.Overshoot/100 * theta0 * 180/pi;
     FG(1,i) = 10/(2*setT(1,i) + overs(1,i));
 
     % plot u
     figure(1)
     subplot(2,1,1)
-    plot(kt,theta,p_colors(i));
+    plot(kt,theta,p_colors(i),'Linewidth',1.5);
     hold on
     xlabel('time (s)');
     ylabel('\theta (º)');
 
     subplot(2,1,2)
-    stairs(uout.time,uout.signals.values,p_colors(i))
+    stairs(uout.time,uout.signals.values,p_colors(i),'Linewidth',1.5)
     hold on
     xlabel('time (s)');
     ylabel('u (N.m)');
 end
+%
+subplot(211)
+plot(kt,rout,'k','Linewidth',1.5)
+legendStrings = "|u| < " + string(u_vector);
+legendStrings(end+1) = "Reference";
+legend(legendStrings,'Location','NorthEast');
+
 
 u_min = -100;
 u_max = 100;
@@ -131,21 +132,27 @@ for i=1:length(du_vector)
 
     % Simulates the controlled plant    
     sim('P4_simulink',Tmax);
-    inff = stepinfo(-theta,kt,-ref_amp*180/pi,-theta0*180/pi,'SettlingTimeThreshold',0.005); % 0.005*|y_f-y_i|, 0.05% chega para ref_amp de 10º mas para outros valores pode ter de variar
+    inff = stepinfo(-theta,kt,-ref_amp*180/pi,-theta0*180/pi,'SettlingTimeThreshold',0.002); % 0.005*|y_f-y_i|, 0.05% chega para ref_amp de 10º mas para outros valores pode ter de variar
     setT(2,i) = inff.SettlingTime;
-    overs(2,i) = inff.Overshoot/10;
+    overs(2,i) = inff.Overshoot/100 * theta0 * 180/pi;
     FG(2,i) = 10/(2*setT(2,i) + overs(2,i));
 
     figure(2)
     subplot(2,1,1)
-    plot(kt,theta,p_colors(i));
+    plot(kt,theta,p_colors(i),'Linewidth',1.5);
     hold on
     xlabel('time (s)');
     ylabel('\theta (º)');
 
     subplot(2,1,2)
-    stairs(uout.time,uout.signals.values,p_colors(i))
+    stairs(uout.time,uout.signals.values,p_colors(i),'Linewidth',1.5)
     hold on
     xlabel('time (s)');
     ylabel('u (N.m)');
 end
+%
+subplot(211)
+plot(kt,rout,'k','Linewidth',1.5)
+legendStrings = "|\Delta u| < " + string(du_vector);
+legendStrings(end+1) = "Reference";
+legend(legendStrings,'Location','NorthEast');

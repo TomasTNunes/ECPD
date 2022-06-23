@@ -42,7 +42,7 @@ Dcd=Dp(1);
 
 % Definition of MPC parameters
 Hw=1;
-Hp=30;   % Minimum Hp=2; corresponds to 1-step prediction horizon
+Hp=10;   % Minimum Hp=2; corresponds to 1-step prediction horizon
 Hu=Hp;
 
 zblk=1;
@@ -82,27 +82,20 @@ Tmax=5; % (s) Duration of the simulation
 
 % Simulates the controlled plant    
 sim('P4_simulink',Tmax);
-stepinfo(-theta,kt,-ref_amp*180/pi,-theta0*180/pi,'SettlingTimeThreshold',0.005)  % 0.005*|y_f-y_i|, 0.05% chega para ref_amp de 10º mas para outros valores pode ter de variar
-%stepinfo(theta,kt,ref_amp*180/pi,theta0*180/pi,'SettlingTimeThreshold',0.005)
+stepinfo(-theta,kt,-ref_amp*180/pi,-theta0*180/pi,'SettlingTimeThreshold',0.002)  % 0.005*|y_f-y_i|, 0.05% chega para ref_amp de 10º mas para outros valores pode ter de variar
 
 % Plots results
 figure()
 subplot(211)
-gg=plot(kt,theta,'b');
-set(gg,'LineWidth',1.5);
+plot(kt,theta,'r','LineWidth',1.5);
 hold on
-plot(kt,rout,'r','LineWidth',1.5)
-gg=xlabel('Time (s)');
-set(gg,'FontSize',14);
-gg=ylabel('\theta (º)');
-set(gg,'FontSize',14);
-gg=legend('\theta','\theta_{ref}','Location','NorthEast');
+plot(kt,rout,'b','LineWidth',1.5)
+xlabel('Time (s)');
+ylabel('\theta (º)');
+title(sprintf('R = %s & Q = %s & H_p = %s & no constraints',string(R),string(Q),string(Hp)))
+legend('\theta','\theta_{ref}','Location','NorthEast')
 
 subplot(212)
-gg=stairs(uout.time,uout.signals.values,'b');
-set(gg,'LineWidth',1.5);
-gg=xlabel('Time (s)');
-set(gg,'FontSize',14);
-gg=ylabel('u (N.m)');
-set(gg,'FontSize',14);
-
+stairs(uout.time,uout.signals.values,'r','LineWidth',1.5);
+xlabel('Time (s)');
+ylabel('u (N.m)');
