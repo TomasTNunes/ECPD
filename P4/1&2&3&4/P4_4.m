@@ -41,6 +41,7 @@ Ccd=Cp(1,:);
 Dcd=Dp(1);
 
 % Definition of MPC parameters
+% Horizon values
 Hw=1;
 Hp=10;   % Minimum Hp=2; corresponds to 1-step prediction horizon
 Hu=Hp;
@@ -48,17 +49,19 @@ Hu=Hp;
 zblk=1;
 ublk=1;
 
-% 0.22
+% u Constraints
 u_min = -0.22;
 u_max = 0.22;
 
-% 0.085
+% du Constraints
 du_min=-0.085;
 du_max=0.085;
 
+% Constraintments of z
 z_min=-100;  % rad
 z_max=100;   % rad
 
+% Cost Weights
 Q=1;
 R=0.1; 
 
@@ -84,13 +87,13 @@ Tmax=6; % (s) Duration of the simulation
 sim('P4_simulink',Tmax);
 
 % Plot outputs and control variables
-figure(2)
-subplot(221)
+figure()
+subplot(321)
 plot(kt,theta,'b','LineWidth',1.5)
 xlabel('Time (s)');
 ylabel('\theta (º)');
 hold on
-subplot(223)
+subplot(323)
 stairs(uout.time,uout.signals.values,'b','LineWidth',1.5);
 xlabel('Time (s)');
 ylabel('u (N.m)');
@@ -117,22 +120,21 @@ pulse_dist = [t' ye']; % simulink input
 sim('P4_disturbance_sim',Tmax);
 
 % Plots Disturbance
-figure(1)
+subplot(3,2,5:6)
 plot(t,ye,'b','LineWidth',1.5);
 xlabel('Time (s)');
 ylabel('u (N.m)');
 title('Disturbance in the control variable')
 
 % Plots outputs and control variables
-figure(2)
-subplot(221)
+subplot(321)
 plot(kt,theta,'r','LineWidth',1.5);
 hold on
 plot(kt,rout,'--k','LineWidth',1.5)
 title_str = 'Q = '+string(Q) + ' & R = '+string(R) + ' & H = '+string(Hp) +  ' & |u| < '+string(u_max) + ' & |\Delta u| < '+string(du_max);
 title(title_str)
 legend('\theta_{w/o dist}','\theta_{w/ dist}','reference','Location','NorthEast')
-subplot(223)
+subplot(323)
 stairs(uout.time,uout.signals.values,'r','LineWidth',1.5);
 
 clear theta kt uout rout uout_MPC
@@ -147,13 +149,12 @@ Tmax=6; % (s) Duration of the simulation
 sim('P4_simulink',Tmax);
 
 % Plots outputs and control variables
-figure(2)
-subplot(222)
+subplot(322)
 plot(kt,theta,'b','LineWidth',1.5)
 hold on
 xlabel('Time (s)');
 ylabel('\theta (º)');
-subplot(224)
+subplot(324)
 stairs(uout.time,uout.signals.values,'b','LineWidth',1.5);
 hold on
 xlabel('Time (s)');
@@ -164,13 +165,12 @@ clear theta kt uout rout
 sim('P4_disturbance_sim',Tmax);
 
 % Plots outputs and control variables
-figure(2)
-subplot(222)
+subplot(322)
 plot(kt,theta,'r','LineWidth',1.5);
 hold on
 plot(kt,rout,'--k','LineWidth',1.5)
 title_str = 'Q = '+string(Q) + ' & R = '+string(R) + ' & H = '+string(Hp) +  ' & |u| < '+string(u_max) + ' & |\Delta u| < '+string(du_max);
 title(title_str)
 legend('\theta_{w/o dist}','\theta_{w/ dist}','reference','Location','SouthEast')
-subplot(224)
+subplot(324)
 stairs(uout.time,uout.signals.values,'r','LineWidth',1.5);

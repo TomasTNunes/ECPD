@@ -42,22 +42,25 @@ Dcd=Dp(1);
 
 % Definition of Initial MPC parameters
 Hw=1;
-%Hp=5;   % Minimum Hp=2; corresponds to 1-step prediction horizon
+% Horizon values vector
 Hp_vector = 2:1:25;
-%Hu=Hp;
 
 zblk=1;
 ublk=1;
 
+% u Constraints
 u_min=-100;
 u_max=100;
 
+% du Constraints
 du_min=-100;
 du_max=100;
 
+% z Constraints
 z_min=-100; % rad
 z_max=100; % rad
 
+% Vector with R values and Q=1 of Cost Matrix
 Q=1; 
 R_vector = [0.001,0.01,0.1,1,10,100,500,1000]; 
 
@@ -74,11 +77,13 @@ ref_step_time = 11; % s
 theta0 = 30 * pi/180; % inicial position(x1) in rad
 Tmax=10; % (s) Duration of the simulation
 
+% Loop for R values
 for i=1:length(R_vector)
     clear md R inff theta uout rout kt setT overs FG
 
     R = R_vector(i);
     
+    % Loop for Horizon values
     for ii=1:length(Hp_vector)
         clear md inff theta uout rout kt Hp Hu 
         Hp = Hp_vector(ii);
@@ -91,12 +96,15 @@ for i=1:length(R_vector)
     
         % Simulates the controlled plant    
         sim('P4_simulink',Tmax);
+
+        % get Step info
         inff = stepinfo(-theta,kt,-ref_amp*180/pi,-theta0*180/pi,'SettlingTimeThreshold',0.002); % 0.005*|y_f-y_i|, 0.05% chega para ref_amp de 10º mas para outros valores pode ter de variar
         setT(i,ii) = inff.SettlingTime;
         overs(i,ii) = inff.Overshoot/100 * theta0 * 180/pi;
         FG(i,ii) = 10/(2*setT(i,ii) + overs(i,ii));
     end
-
+    
+    % Plots Settling time
     figure(1)
     subplot(4,2,i)
     plot(Hp_vector,setT(i,:),'r.','LineWidth',1.5)
@@ -104,9 +112,10 @@ for i=1:length(R_vector)
     ylabel('settling time [s]')
     xlabel('H_p')
     if i==5 | i==6 | i==7 | i==8
-        xlim([i-2 25])  % Hp menores que estes dava overshhots muito altos pq era instavel
+        xlim([i-2 25])  % limit due to high overshoots for small predictive Horizons
     end
-
+    
+    % Plots Overshoot
     figure(2)
     subplot(4,2,i)
     plot(Hp_vector,overs(i,:),'b.','LineWidth',1.5)
@@ -114,23 +123,30 @@ for i=1:length(R_vector)
     ylabel('overshoot')
     xlabel('H_p')
     if i==5 | i==6 | i==7 | i==8
-        xlim([i-2 25])   % Hp menores que estes dava overshhots muito altos pq era instavel
+        xlim([i-2 25])   % limit due to high overshoots for small predictive Horizons
     end
-
+    
+    % Plots Merit Figure
     figure(3)
     subplot(4,2,i)
-    plot(Hp_vector,FG(i,:),'g.','LineWidth',1.5)
+    plot(Hp_vector,FG(i,:),'m.','LineWidth',1.5)
     title(sprintf('R = %s & Q = %s & no constraints',string(R),string(Q)))
     ylabel('FG')
     xlabel('H_p')
     if i==5 | i==6 | i==7 | i==8
-        xlim([i-2 25])  % Hp menores que estes dava overshhots muito altos pq era instavel
+        xlim([i-2 25])  % limit due to high overshoots for small predictive Horizons
     end
 end
 clear md R Hp theta uout rout kt inff
 
+% Best Option based on Settling time, Overshoot and Merit Figure
+% R=0.1 & Hp=10
+
+% Horizon
 Hp = 10;
 Hu=Hp;
+
+% R weight of Cost Matrix
 R = 0.1;
 
 % MPC inicialization
@@ -140,44 +156,47 @@ md = MPCInit(Ad,Bd,Cyd,Czd,Dzd,Ccd,Dcd,Hp,Hw,zblk,Hu,ublk, ...
     
 
 % Simulates the controlled plant
-Tmax=4; % (s) Duration of the simulation
+Tmax=2; % (s) Duration of the simulation
 sim('P4_simulink',Tmax);
 
+% Plots output
 figure()
-subplot(211)
+subplot(221)
 plot(kt,theta,'r','LineWidth',1.5);
 hold on
-plot(kt,rout,'b','LineWidth',1.5)
+plot(kt,rout,'--b','LineWidth',1.5)
 xlabel('Time (s)');
 ylabel('\theta (º)');
 title(sprintf('R = %s & Q = %s & H_p = %s & no constraints',string(R),string(Q),string(Hp)))
 legend('\theta','\theta_{ref}','Location','NorthEast')
 
-subplot(212)
+% Plots Control variable
+subplot(223)
 stairs(uout.time,uout.signals.values,'r','LineWidth',1.5);
 xlabel('Time (s)');
 ylabel('u (N.m)');
 
 
 % Simulates the controlled plant
-ref_amp = 10 * pi/180; % rad
-ref_step_start = 2; % s
+ref_amp = 15 * pi/180; % rad
+ref_step_start = 1; % s
 ref_step_time = 11; % s
 theta0 = 0 * pi/180; % inicial position(x1) in rad
-Tmax=10; % (s) Duration of the simulation
+Tmax=4; % (s) Duration of the simulation
 sim('P4_simulink',Tmax);
 
-figure()
-subplot(211)
+% Plots output
+subplot(222)
 plot(kt,theta,'r','LineWidth',1.5);
 hold on
-plot(kt,rout,'b','LineWidth',1.5)
+plot(kt,rout,'--b','LineWidth',1.5)
 xlabel('Time (s)');
 ylabel('\theta (º)');
 title(sprintf('R = %s & Q = %s & H_p = %s & no constraints',string(R),string(Q),string(Hp)))
-legend('\theta','\theta_{ref}','Location','NorthEast')
+legend('\theta','\theta_{ref}','Location','SouthEast')
 
-subplot(212)
+% Plots Control variable
+subplot(224)
 stairs(uout.time,uout.signals.values,'r','LineWidth',1.5);
 xlabel('Time (s)');
 ylabel('u (N.m)');

@@ -32,7 +32,7 @@ Bpd=SYSD.b;
 % Model used by MPC
 Ad=Apd;
 Bd=Bpd;
-Cyd=Cp;
+Cyd=Cp;    
 
 Czd=Cp(1,:);
 Dzd=Dp(1);
@@ -41,6 +41,7 @@ Ccd=Cp(1,:);
 Dcd=Dp(1);
 
 % Definition of Initial MPC parameters
+% Horizon values
 Hw=1;
 Hp=10;   % Minimum Hp=2; corresponds to 1-step prediction horizon
 Hu=Hp;
@@ -48,13 +49,15 @@ Hu=Hp;
 zblk=1;
 ublk=1;
 
-
+% Vectors with Constraintments of u and delta u
 u_vector = [0.4 0.25 0.15];
 du_vector = [0.3 0.15 0.1 0.085];
 
+% Constraintments of z
 z_min=-100; % rad
 z_max=100; % rad
 
+% Cost Weights
 Q=1; 
 R = 0.1; 
 
@@ -74,8 +77,11 @@ Tmax=3; % (s) Duration of the simulation
 % plot colors
 p_colors=['b' 'r' 'g' 'c' 'm'];
 
+% du Constraints
 du_min = -100;
 du_max = 100;
+
+% Loop for u constraints values
 for i=1:length(u_vector)
     clear u_min u_max theta kt uout inff md
 
@@ -90,35 +96,42 @@ for i=1:length(u_vector)
 
     % Simulates the controlled plant    
     sim('P4_simulink',Tmax);
+
+    % get Step info
     inff = stepinfo(-theta,kt,-ref_amp*180/pi,-theta0*180/pi,'SettlingTimeThreshold',0.002); % 0.005*|y_f-y_i|, 0.05% chega para ref_amp de 10º mas para outros valores pode ter de variar
     setT(1,i) = inff.SettlingTime;
     overs(1,i) = inff.Overshoot/100 * theta0 * 180/pi;
     FG(1,i) = 10/(2*setT(1,i) + overs(1,i));
 
-    % plot u
+    % Plot outputs
     figure(1)
     subplot(2,1,1)
     plot(kt,theta,p_colors(i),'Linewidth',1.5);
+    title_str = 'Q = '+string(Q) + ' & R = '+string(R) + ' & H = '+string(Hp);
+    title(title_str)
     hold on
     xlabel('time (s)');
     ylabel('\theta (º)');
-
+    
+    % Plots contol variable
     subplot(2,1,2)
     stairs(uout.time,uout.signals.values,p_colors(i),'Linewidth',1.5)
     hold on
     xlabel('time (s)');
     ylabel('u (N.m)');
 end
-%
+% Plots reference
 subplot(211)
-plot(kt,rout,'k','Linewidth',1.5)
+plot(kt,rout,'--k','Linewidth',1.5)
 legendStrings = "|u| < " + string(u_vector);
 legendStrings(end+1) = "Reference";
 legend(legendStrings,'Location','NorthEast');
 
-
+% du Constraints
 u_min = -100;
 u_max = 100;
+
+% Loop for delta u constraints values
 for i=1:length(du_vector)
     clear du_min du_max theta kt uout inff md
 
@@ -132,27 +145,33 @@ for i=1:length(du_vector)
 
     % Simulates the controlled plant    
     sim('P4_simulink',Tmax);
+
+    % get Step info
     inff = stepinfo(-theta,kt,-ref_amp*180/pi,-theta0*180/pi,'SettlingTimeThreshold',0.002); % 0.005*|y_f-y_i|, 0.05% chega para ref_amp de 10º mas para outros valores pode ter de variar
     setT(2,i) = inff.SettlingTime;
     overs(2,i) = inff.Overshoot/100 * theta0 * 180/pi;
     FG(2,i) = 10/(2*setT(2,i) + overs(2,i));
-
+    
+    % Plots outputs
     figure(2)
     subplot(2,1,1)
     plot(kt,theta,p_colors(i),'Linewidth',1.5);
     hold on
     xlabel('time (s)');
     ylabel('\theta (º)');
-
+    title_str = 'Q = '+string(Q) + ' & R = '+string(R) + ' & H = '+string(Hp);
+    title(title_str)
+    
+    % Plots control variable
     subplot(2,1,2)
     stairs(uout.time,uout.signals.values,p_colors(i),'Linewidth',1.5)
     hold on
     xlabel('time (s)');
     ylabel('u (N.m)');
 end
-%
+% Plot reference
 subplot(211)
-plot(kt,rout,'k','Linewidth',1.5)
+plot(kt,rout,'--k','Linewidth',1.5)
 legendStrings = "|\Delta u| < " + string(du_vector);
 legendStrings(end+1) = "Reference";
 legend(legendStrings,'Location','NorthEast');

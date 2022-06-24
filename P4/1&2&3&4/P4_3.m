@@ -41,7 +41,7 @@ Ccd=Cp(1,:);
 Dcd=Dp(1);
 
 % Definition of MPC parameters
-
+% Horizon values
 Hw=1;
 Hp=10;   % Minimum Hp=2; corresponds to 1-step prediction horizon
 Hu=Hp;
@@ -104,10 +104,6 @@ for i=1:length(R_vector)
         setT(i,ii) = inff.SettlingTime; % settling time
         overs(i,ii) = inff.Overshoot/100 * theta0 * 180/pi; % overshoot
         FG(i,ii) = 10/(2*setT(i,ii) + overs(i,ii)); % Merit Figure
-
-        %setT(i,ii) = inff.SettlingTime; % settling time
-        %overs(i,ii) = inff.Overshoot/100 * theta0 * 180/pi; % overshoot
-        %FG(i,ii) = 10/(2*setT(i,ii) + overs(i,ii)); % Merit Figure
 
         % Simulates the controlled plant with LQR   
         sim('P4_sim_LQR',Tmax);
@@ -255,5 +251,5 @@ subplot(211)
 plot(kt,rout,'--k','Linewidth',1.5)
 legendStrings = "\theta_0 = " + string(theta0_vector*180/pi) + "º";
 legendStrings(end+1) = "Reference";
-legend(legendStrings,'Location','NorthWest');
+legend(legendStrings,'Location','NorthEast');
 
