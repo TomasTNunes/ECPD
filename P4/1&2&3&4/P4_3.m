@@ -118,7 +118,7 @@ for i=1:length(R_vector)
         plot(kt,theta,'r','Linewidth',1.5)
         hold on
         plot(t,theta_LQR,'b','Linewidth',1.5)
-        plot(kt,rout,'k','Linewidth',1.5)
+        plot(kt,rout,'--k','Linewidth',1.5)
         xlabel('time (s)');
         ylabel('\theta (º)');
         legend('\theta_{MPC}','\theta_{LQR}','\theta_{ref}','Location','NorthEast')
@@ -199,7 +199,61 @@ for i=1:length(Hp_vector)
 end
 % Plots reference
 subplot(211)
-plot(kt,rout,'k','Linewidth',1.5)
+plot(kt,rout,'--k','Linewidth',1.5)
 legendStrings = "H_p = " + string(Hp_vector);
 legendStrings(end+1) = "Reference";
 legend(legendStrings,'Location','NorthEast');
+
+
+% Basin of attraction of the vertical position with respect to the initial conditions
+theta0_vector = [-31.7 -31.69 -15 15 31.69 31.7] * pi/180; % inicial position(x1) in rad
+Tmax=5; % (s) Duration of the simulation
+
+% Horizon
+Hp = 10;
+Hu=Hp;
+
+% R weight
+R=0.1;
+
+% plot colors
+p_colors=['b' 'g' 'y' 'c' 'm' 'r'];
+
+% Loop for theta0 Values
+for i=1:length(theta0_vector)
+    clear kt theta uout rout md inff
+
+    theta0 = theta0_vector(i);
+    
+    % MPC inicialization
+    md = MPCInit(Ad,Bd,Cyd,Czd,Dzd,Ccd,Dcd,Hp,Hw,zblk,Hu,ublk, ...
+	            du_max,du_min,u_max,u_min,z_max, ...
+	            z_min,Q,R,W,V,h,cmode,solver);
+
+    % Simulates the controlled plant with MPC   
+    sim('P4_simulink',Tmax);
+
+    % Plots the outputs
+    figure(6)
+    subplot(211)
+    plot(kt,theta,p_colors(i),'Linewidth',1.5)
+    hold on
+    xlabel('time (s)');
+    ylabel('\theta (º)'); 
+    title_str = 'Q = '+string(Q) + ' & R = '+string(R) + ' & H = '+string(Hp) +  ' & |u| < '+string(u_max) + ' & |\Delta u| < '+string(du_max);
+    title(title_str)
+
+    % Plots the control variable
+    subplot(212)
+    stairs(uout.time,uout.signals.values,p_colors(i),'Linewidth',1.5);
+    hold on
+    xlabel('time (s)');
+    ylabel('u (N.m)');
+end
+% Plots reference
+subplot(211)
+plot(kt,rout,'--k','Linewidth',1.5)
+legendStrings = "\theta_0 = " + string(theta0_vector*180/pi) + "º";
+legendStrings(end+1) = "Reference";
+legend(legendStrings,'Location','NorthWest');
+
