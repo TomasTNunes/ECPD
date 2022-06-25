@@ -62,7 +62,7 @@ z_max=100; % rad
 
 % Vector with R values and Q=1 of Cost Matrix
 Q=1; 
-R_vector = [0.001,0.01,0.1,1,10,100,500,1000]; 
+R_vector = [0.01,0.1,1,10,100,1000]; 
 
 W=[]; % state estimator not used
 V=[]; % 
@@ -106,7 +106,7 @@ for i=1:length(R_vector)
     
     % Plots Settling time
     figure(1)
-    subplot(4,2,i)
+    subplot(3,2,i)
     plot(Hp_vector,setT(i,:),'r.','LineWidth',1.5)
     title(sprintf('R = %s & Q = %s & no constraints',string(R),string(Q)))
     ylabel('settling time [s]')
@@ -117,7 +117,7 @@ for i=1:length(R_vector)
     
     % Plots Overshoot
     figure(2)
-    subplot(4,2,i)
+    subplot(3,2,i)
     plot(Hp_vector,overs(i,:),'b.','LineWidth',1.5)
     title(sprintf('R = %s & Q = %s & no constraints',string(R),string(Q)))
     ylabel('overshoot')
@@ -128,7 +128,7 @@ for i=1:length(R_vector)
     
     % Plots Merit Figure
     figure(3)
-    subplot(4,2,i)
+    subplot(3,2,i)
     plot(Hp_vector,FG(i,:),'m.','LineWidth',1.5)
     title(sprintf('R = %s & Q = %s & no constraints',string(R),string(Q)))
     ylabel('FG')
