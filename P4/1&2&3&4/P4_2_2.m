@@ -131,7 +131,7 @@ for i=1:length(R_vector)
     subplot(3,2,i)
     plot(Hp_vector,FG(i,:),'m.','LineWidth',1.5)
     title(sprintf('R = %s & Q = %s & no constraints',string(R),string(Q)))
-    ylabel('FG')
+    ylabel('FoM')
     xlabel('H_p')
     if i==5 | i==6 | i==7 | i==8
         xlim([i-2 25])  % limit due to high overshoots for small predictive Horizons
