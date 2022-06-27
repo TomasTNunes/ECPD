@@ -79,7 +79,7 @@ Tmax=10; % (s) Duration of the simulation
 
 % Loop for R values
 for i=1:length(R_vector)
-    clear md R inff theta uout rout kt setT overs FG
+    clear md R inff theta uout rout kt
 
     R = R_vector(i);
     
@@ -111,8 +111,8 @@ for i=1:length(R_vector)
     title(sprintf('R = %s & Q = %s & no constraints',string(R),string(Q)))
     ylabel('settling time [s]')
     xlabel('H_p')
-    if i==5 | i==6 | i==7 | i==8
-        xlim([i-2 25])  % limit due to high overshoots for small predictive Horizons
+    if i==3 | i==4 | i==5 | i==6
+        xlim([i 25])  % limit due to high overshoots for small predictive Horizons
     end
     
     % Plots Overshoot
@@ -122,8 +122,8 @@ for i=1:length(R_vector)
     title(sprintf('R = %s & Q = %s & no constraints',string(R),string(Q)))
     ylabel('overshoot')
     xlabel('H_p')
-    if i==5 | i==6 | i==7 | i==8
-        xlim([i-2 25])   % limit due to high overshoots for small predictive Horizons
+    if i==3 | i==4 | i==5 | i==6
+        xlim([i 25])   % limit due to high overshoots for small predictive Horizons
     end
     
     % Plots Merit Figure
@@ -133,8 +133,8 @@ for i=1:length(R_vector)
     title(sprintf('R = %s & Q = %s & no constraints',string(R),string(Q)))
     ylabel('FoM')
     xlabel('H_p')
-    if i==5 | i==6 | i==7 | i==8
-        xlim([i-2 25])  % limit due to high overshoots for small predictive Horizons
+    if i==3 | i==4 | i==5 | i==6
+        xlim([i 25])  % limit due to high overshoots for small predictive Horizons
     end
 end
 clear md R Hp theta uout rout kt inff
